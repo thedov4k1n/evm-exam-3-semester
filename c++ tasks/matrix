@@ -1,0 +1,72 @@
+// недопилена, но что-то в таком духе
+
+
+#include<iostream>
+class Matrix {
+	public:
+		Matrix();
+		Matrix(const double* data, int numRows, int numCols);
+		Matrix(const Matrix& other);
+		Matrix& operator=(const Matrix& other);
+		~Matrix();
+		void Print() const;
+	private:
+		double* data;
+		int numRows;
+		int numCols;
+};
+
+Matrix::Matrix():
+	numRows(0),
+	numCols(0),
+	data(nullptr)
+	{ }
+
+Matrix::Matrix(const double* data, int numRows, int numCols):
+	numRows(numRows),
+	numCols(numCols)
+	{
+		data=new double[numCols*numRows];
+		data=data;
+	}
+
+Matrix::Matrix(const Matrix& other){
+	numCols=other.numCols;
+	numRows=other.numRows;
+	data= new double[numRows*numCols];
+	data=other.data;
+}
+
+void Matrix::Print() const{
+	int i=0;
+	while(data[i]!=NULL){
+		std::cout<<data[i];
+		i++;
+	}
+}
+
+Matrix& Matrix::operator=(const Matrix& other){
+	numCols=other.numCols;
+	numRows=other.numRows;
+	data= new double[numRows*numCols];
+	data=other.data;
+	return *this;
+}
+
+Matrix::~Matrix(){
+	if(data) delete[] data;
+}
+	
+	
+int main(){
+	double arr[4]={1, 2, 3, 4};
+	Matrix a, c;
+	a=Matrix(arr, 2, 2);
+	Matrix b(a);
+	c=b;
+	a.Print();
+	b.Print();
+	c.Print();
+	return 0;
+}
+
